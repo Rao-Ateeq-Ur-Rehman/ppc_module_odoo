@@ -1,0 +1,40 @@
+th.table_heads {
+    min-width: 160px !important;
+    border: 2px solid black;
+    font-size: 14px;
+    padding: 15px 0px 15px 0px;
+    text-align: center;
+    font-weight: 700;
+}
+.div_container {
+    width: fit-content;
+    padding: 4% 4% 4% 4%;
+}
+.table_rows {
+    border: 0.5px solid grey;
+    cursor: -webkit-grab;
+    color: black;
+}
+.table_row_data{
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+}
+.fabric_type_heading {
+    padding: 35px 0px 5px 0px;
+    color: black;
+    font-size: 21px;
+    font-weight: 500;
+}
+.editable_remarks {
+    margin-right: 10px !important;
+}
+select.selector_field {
+    text-align: center;
+    padding: 4px 0px 4px 0px;
+}
+tr.disabled_row {
+    color: #808080a3;
+}
+.disabled{
+    color: #808080a3;
+}

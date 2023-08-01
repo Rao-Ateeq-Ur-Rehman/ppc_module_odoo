@@ -1,0 +1,50 @@
+#ppc_order_form .o_form_view .o_group .o_wrap_label .o_form_label {
+    font-weight: 400;
+    font-size: 14px;
+    padding-top: 7%;
+}
+#ppc_order_form .fields_border{
+    border: 1.5px solid #dee2e6;
+    height: 100%;
+    padding-top: 3%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#ppc_order_form .custom_border{
+    margin-left: 17px;
+    border-right: 0px;
+}
+#ppc_order_form .o_field_widget{
+    border: 0px !important
+}
+#ppc_order_form .ppc_order_save_btn{
+    border: 0px;
+    background-color: black;
+    color: white;
+    padding: 5px 25px 5px 25px;
+    font-size: 15px;
+    margin-top: 2%;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 15px;
+    cursor: pointer;
+}
+#ppc_order_form .ppc_order_save_btn:hover {
+    background-color: inherit !important;
+    color: inherit !important;
+    cursor: pointer;
+}
+#ppc_order_form label.o_form_label {
+    margin-top: 10%;
+}
+.black_button{
+    border: 0px;
+    background-color: black;
+    color: white;
+    padding: 10px 25px 10px 25px;
+    font-size: 15px;
+    margin-top: 2%;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 15px;
+}
+.black_button:hover{
+    background-color:white;
+    color:black;
+}

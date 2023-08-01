@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+ppc.access_order_data,access_order_data,ppc.model_order_data,base.group_user,1,1,1,1
+ppc.access_order_classification,access_order_classification,ppc.model_order_classification,base.group_user,1,1,1,1
+ppc.access_customers,access_customers,ppc.model_customers,base.group_user,1,1,1,1
+ppc.access_order_operations,access_order_operations,ppc.model_order_operations,base.group_user,1,1,1,1
+
+

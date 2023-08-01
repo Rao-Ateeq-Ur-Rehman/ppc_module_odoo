@@ -1,0 +1,66 @@
+<templates xml:space="preserve">
+  <t t-name="ppc.GetExcelDataTemplate" owl="1">
+    <div class="excel_container">
+       <div class="heading_container">
+        <h1>UPLOAD EXCEL FILE</h1>
+        <div class="input_container">
+          <input type="file" id="fileUploadInput" class="custom-file-input"/>
+          <button id="uploadFile" type="button" t-on-click="handleFileUpload">Upload</button>
+        </div>
+      </div>
+    </div>
+    <div class="div_container" t-if="state.excelData and Object.keys(state.excelData).length > 0">
+      <div class="excel_data">
+        <t t-if="state.excelData and Object.keys(state.excelData).length > 0">
+          <table>
+            <thead>
+              <tr>
+                <t t-foreach="Object.keys(state.excelData)" t-as="key" t-key="generateRandomNumber()">
+                  <th class="excel_data_table_heads"><t t-esc="key"/></th>
+                </t>
+                <th class="excel_data_table_heads">Urgency Status</th>
+                <th class="excel_data_table_heads">Classification</th>
+                <th class="excel_data_table_heads">Add Order</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-set="duplicateValues" t-value="[]" />
+              <t t-foreach="Object.keys(state.excelData[Object.keys(state.excelData)[0]])" t-as="nestedKey" t-key="'nestedKey-' + nestedKey">
+                <t t-set="ppLotNum" t-value="state.excelData['ppLot'][nestedKey]" />
+                <tr class="excel_data_table_rows" t-attf-class="{{ state.orderData.some(order => order.ppLot === ppLotNum) ? 'highlighted' : '' }}">
+                  <t t-foreach="Object.keys(state.excelData)" t-as="key" t-key="'key-' + key">
+                    <td class="excel_data_table_rows">
+                      <input class="excel_input_fields" type="text" t-att-value="state.excelData[key][nestedKey]" t-att-column-name="key" t-on-blur="event => changeExcelData(event, key, nestedKey)" />
+                    </td>
+                  </t>
+                  <td class="excel_data_table_rows ">
+                    <select t-att-id="'urgencyStatusSelector-' + nestedKey" class="urgencyStatusSelector excel_input_fields">
+                      <option value="redAlert">Red Alert</option>
+                      <option value="dispatchDate">Dispatch Date</option>
+                      <option value="orderLate">Order Late</option>
+                    </select>
+                  </td>
+                  <td class="excel_data_table_rows ">
+                    <select t-att-id="'classificationSelector-' + nestedKey" class="classificationSelector excel_input_fields">
+                      <t t-foreach="state.classifications" t-as="classification" t-key="'classification-' + classification">
+                        <option t-att-value="classification">
+                          <t t-esc="classification" />
+                        </option>
+                      </t>
+                    </select>
+                  </td>
+                  <td class="excel_data_table_rows">
+                    <input type="checkbox" t-att-disabled="state.orderData.some(order => order.ppLot === ppLotNum) || state.duplicateCount > 0" t-att-checked="!state.orderData.some(order => order.ppLot === ppLotNum) || (state.duplicateCount === 0 and !state.orderData.some(order => order.ppLot === ppLotNum))" />
+                    </td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+        </t>
+      </div>
+      <div style="text-align: right;">
+        <button class="black_button" id="ppc_plan_save_button" t-on-click="upload_data">Upload Data</button>
+      </div>
+    </div>
+  </t>
+</templates>

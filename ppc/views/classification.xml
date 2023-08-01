@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <odoo>
+        <record id="ppc_add_classification_tree" model="ir.ui.view">
+            <field name="name">ppc.add.classification.tree</field>
+            <field name="model">order.classification</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="classification_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="ppc_add_classification_form_action" model="ir.actions.act_window">
+            <field name="name">Classification</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">order.classification</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Order Class
+                </p>
+            </field>
+        </record>
+    </odoo>

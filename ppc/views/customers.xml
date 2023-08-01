@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <odoo>
+        <record id="ppc_add_customer_tree" model="ir.ui.view">
+            <field name="name">ppc.add.customers.tree</field>
+            <field name="model">customers</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="ppc_add_customer_form_action" model="ir.actions.act_window">
+            <field name="name">Customer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">customers</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Customer
+                </p>
+            </field>
+        </record>
+    </odoo>

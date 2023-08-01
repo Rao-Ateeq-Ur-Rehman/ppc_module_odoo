@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- FORM VIEW For PPC Order Data -->
+    <record id="ppc_order_form" model="ir.ui.view">
+        <field name="name">ppc.order.form</field>
+        <field name="model">order.data</field>
+        <field name="arch" type="xml">
+            <form autocommit="0">
+                <sheet>
+                    <div id="ppc_order_form">
+                        <group col="2">
+                            <group>
+                                <field name="ppLot"/>
+                                <field name="fabricType"/>
+                                <field name="urgencyStatus"/>
+                                <field name="placement_date"/>
+                                <field name="dispatch_date"/>
+                                <field name="greigeWidth"/>
+                                <field name="finishedGreigeWidth"/>
+                                <field name="rel"/>
+                                <field name="tol"/>
+                                <field name="requiredQuantity"/>
+                                <field name="totalRequiredQuantity"/>
+                            </group>
+                            <group>
+                                <field name="classification" options="{'no_create': True}">
+                                    <tree>
+                                        <field name="classification_name"/>
+                                    </tree>
+                                    <form>
+                                        <field name="classification_name" style="text-transform:capitalize;"/>
+                                    </form>
+                                </field>
+                                <field name="customers"/>
+                                <field name="finish"/>
+                                <field name="orderNumber"/>
+                                <field name="articleNumber"/>
+                                <field name="greyLotNumber"/>
+                                <field name="color"/>
+                                <field name="weave"/>
+                                <field name="meters"/>
+                                <field name="supplier"/>
+                                <field name="sourceWeft"/>
+                                <field name="sourceWarp"/>
+                                <field name="remarks"/>
+                            </group>
+                        </group>
+                        <div style="text-align: right;">
+                            <button name="save_data" string="Save" type="object" class="btn-primary ppc_order_save_btn"/>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Action For PPC Add Order -->
+    <record id="ppc_order_form_action" model="ir.actions.act_window">
+        <field name="name">PPC Order Form</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">order.data</field>
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Order
+            </p>
+        </field>
+    </record>
+
+
+
+        <!--  PPC Orders View Action  -->
+    <record id="ppc_order_view_action" model="ir.actions.client">
+        <field name="name">PPC Orders View</field>
+        <field name="tag">ppc.ppc_order_view_js</field>
+    </record>
+
+            <!--  PPC Orders Approve Action  -->
+    <record id="approve_ppc_order_action" model="ir.actions.client">
+        <field name="name">Approve PPC Orders</field>
+        <field name="tag">ppc.approve_ppc_order_js</field>
+    </record>
+
+            <!--  PPC Upload Excel Data Screen  -->
+    <record id="get_excel_data_action" model="ir.actions.client">
+        <field name="name">Upload Excel File</field>
+        <field name="tag">ppc.get_excel_data_js</field>
+    </record>
+
+    <menuitem name="PPC Orders" id="ppc_order_view" sequence="-2" action="ppc_order_view_action" />
+    <menuitem name="Add Order" id="ppc_main_menu" sequence="0" parent="ppc_order_view"/>
+    <menuitem name="Add New Order" id="ppc_add_order_menu" sequence="0" action="ppc_order_form_action" parent="ppc_main_menu"/>
+    <menuitem name="Classifications" id="ppc_order_classification" sequence="1" action="ppc_add_classification_form_action" parent="ppc_main_menu"/>
+    <menuitem name="Customers" id="ppc_order_customer" sequence="2" action="ppc_add_customer_form_action" parent="ppc_main_menu"/>
+    <menuitem name="Upload Excel Data" id="upload_excel_data" sequence="3" action="get_excel_data_action" parent="ppc_main_menu"/>
+    <menuitem name="Approve PPC Orders" id="approve_ppc_order" sequence="0" action="approve_ppc_order_action" />
+</odoo>
+

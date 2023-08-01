@@ -1,0 +1,73 @@
+<templates xml:space="preserve">
+    <t t-name="ppc.PpcOrderViewTemplate" owl="1">
+        <div class="div_container">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="table_heads">ID</th>
+                        <t t-foreach="state.fieldNames" t-as="field" t-key="field.name">
+                            <t t-if="field.name != 'id' and field.name != 'classification_name' and field.name != 'classification' and field.name != 'urgencyStatus'">
+                                <th t-esc="field.actualName" class="table_heads"/>
+                            </t>
+                            <t t-elif="field.name == 'urgencyStatus'">
+                                <th class="table_heads">Urgency Status</th>
+                            </t>
+                        </t>
+                        <th class="table_heads">Select Orders</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="sortedOrderData" t-value="state.orderData.sort((a, b) => a.sequence - b.sequence)">
+                    </t>
+                    <t t-foreach="state.alignedOrderData" t-as="fabricTypeData" t-key="fabricTypeData.key">
+                        <tr class="fabric_type_row">
+                            <td colspan="100%" class="fabric_type_heading">
+                                <t t-esc="fabricTypeData.key"/>
+                            </td>
+                        </tr>
+                        <t t-foreach="sortedOrderData" t-as="order" t-key="'order-' + order.id">
+                            <t t-if="order.classification_name == fabricTypeData.key">
+                                <tr class="table_rows" t-att-data-row-id="order.id" t-att-data-sequence="order.sequence" t-att-data-classification-name="order.classification_name" draggable="true" t-on-dragstart="event => onDragStart(event, order.id)" t-on-dragover="onDragOver" t-on-drop="onDrop" t-att-class="{'disabled_row': order.status !== 'PPC Operator'}">
+                                    <td t-esc="order.id" class="table_row_data"/>
+                                    <t t-foreach="state.fieldNames" t-as="field" t-key="field.name">
+                                        <t t-if="field.name != 'id' and field.name != 'classification_name' and field.name != 'classification' and field.name != 'urgencyStatus'">
+                                            <t t-if="field.name != 'remarks'">
+                                                <td class="table_row_data">
+                                                    <t t-esc="order[field.name]"/>
+                                                </td>
+                                            </t>
+                                            <t t-elif="field.name == 'remarks'">
+                                                <td class="table_row_data">
+                                                    <input t-att-value="order[field.name]" class="editable_remarks"
+                                                        t-on-blur="event => typingCompleted(order.id, event)"
+                                                        t-att-disabled="order.status !== 'PPC Operator' ? 'disabled' : ''"
+                                                        t-att-class="{'disabled': order.status !== 'PPC Operator'}"
+                                                    />
+                                                </td>
+                                            </t>
+                                        </t>
+                                        <t t-elif="field.name == 'urgencyStatus'">
+                                            <td class="table_row_data">
+                                                <select class="selector_field" t-on-change="event => changeUrgencyStatus(order.id, event)" t-att-disabled="order.status !== 'PPC Operator' ? 'disabled' : ''" t-att-class="{'disabled': order.status !== 'PPC Operator'}">
+                                                    <option value="redAlert" t-att-selected="order[field.name] === 'redAlert' ? 'selected' : ''">Red Alert</option>
+                                                    <option value="orderLate" t-att-selected="order[field.name] === 'orderLate' ? 'selected' : ''">Order Late</option>
+                                                    <option value="dispatchDate" t-att-selected="order[field.name] === 'dispatchDate' ? 'selected' : ''">Dispatch Date</option>
+                                                </select>
+                                            </td>
+                                        </t>
+                                    </t>
+                                    <td class="table_row_data">
+                                        <input type="checkbox" class="row_checkbox" checked="checked" t-att-disabled="order.status !== 'PPC Operator' ? 'disabled' : ''" />
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </t>
+                </tbody>
+            </table>
+            <div style="text-align: right;">
+                <button class="black_button" id="ppc_plan_save_button" t-on-click="ppc_plan_approval">Send For Approval</button>
+            </div>
+        </div>
+    </t>
+</templates>
